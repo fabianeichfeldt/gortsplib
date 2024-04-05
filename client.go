@@ -195,7 +195,7 @@ type ClientOnPacketLostFunc func(err error)
 type ClientOnDecodeErrorFunc func(err error)
 
 // OnPacketRTPFunc is the prototype of the callback passed to OnPacketRTP().
-type OnPacketRTPFunc func(*rtp.Packet)
+type OnPacketRTPFunc func(*rtp.Packet, time.Time)
 
 // OnPacketRTPAnyFunc is the prototype of the callback passed to OnPacketRTP(Any).
 type OnPacketRTPAnyFunc func(*description.Media, format.Format, *rtp.Packet)
@@ -1804,7 +1804,7 @@ func (c *Client) OnPacketRTPAny(cb OnPacketRTPAnyFunc) {
 	for _, cm := range c.medias {
 		cmedia := cm.media
 		for _, forma := range cm.media.Formats {
-			c.OnPacketRTP(cm.media, forma, func(pkt *rtp.Packet) {
+			c.OnPacketRTP(cm.media, forma, func(pkt *rtp.Packet, time time.Time) {
 				cb(cmedia, forma, pkt)
 			})
 		}

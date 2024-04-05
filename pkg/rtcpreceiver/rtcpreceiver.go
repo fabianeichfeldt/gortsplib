@@ -59,6 +59,12 @@ type RTCPReceiver struct {
 	done      chan struct{}
 }
 
+func (rr *RTCPReceiver) GetCurrentClientTime() time.Time {
+	systemTimeDiff := rr.timeNow().Sub(rr.lastTimeSystem)
+	ntpTime := ntpTimeRTCPToGo(rr.lastSenderReportTimeNTP).Add(systemTimeDiff)
+	return ntpTime
+}
+
 // New allocates a RTCPReceiver.
 func New(
 	clockRate int,

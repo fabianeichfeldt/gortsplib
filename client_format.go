@@ -100,7 +100,7 @@ func (cf *clientFormat) readRTPUDP(pkt *rtp.Packet) {
 			continue
 		}
 
-		cf.onPacketRTP(pkt)
+		cf.onPacketRTP(pkt, now)
 	}
 }
 
@@ -119,5 +119,5 @@ func (cf *clientFormat) readRTPTCP(pkt *rtp.Packet) {
 		return
 	}
 
-	cf.onPacketRTP(pkt)
+	cf.onPacketRTP(pkt, cf.rtcpReceiver.GetCurrentClientTime())
 }
