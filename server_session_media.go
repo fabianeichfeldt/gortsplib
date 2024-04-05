@@ -38,7 +38,7 @@ func (sm *serverSessionMedia) initialize() {
 			sm.formats[forma.PayloadType()] = &serverSessionFormat{
 				sm:          sm,
 				format:      forma,
-				onPacketRTP: func(*rtp.Packet) {},
+				onPacketRTP: func(*rtp.Packet, time.Time) {},
 			}
 		}
 	}

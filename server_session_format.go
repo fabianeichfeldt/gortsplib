@@ -69,7 +69,7 @@ func (sf *serverSessionFormat) readRTPUDP(pkt *rtp.Packet, now time.Time) {
 			continue
 		}
 
-		sf.onPacketRTP(pkt)
+		sf.onPacketRTP(pkt, now)
 	}
 }
 
@@ -88,5 +88,5 @@ func (sf *serverSessionFormat) readRTPTCP(pkt *rtp.Packet) {
 		return
 	}
 
-	sf.onPacketRTP(pkt)
+	sf.onPacketRTP(pkt, now)
 }

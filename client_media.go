@@ -83,7 +83,7 @@ func (cm *clientMedia) setMedia(medi *description.Media) {
 		cm.formats[forma.PayloadType()] = &clientFormat{
 			cm:          cm,
 			format:      forma,
-			onPacketRTP: func(*rtp.Packet) {},
+			onPacketRTP: func(*rtp.Packet, time.Time) {},
 		}
 	}
 }
